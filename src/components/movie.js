@@ -5,8 +5,69 @@ import { Image } from 'react-bootstrap'
 import { withRouter } from "react-router-dom";
 import {fetchMovie} from "../actions/movieActions";
 import posterNotFound from "./posterNotFound.jpg";
+import { Col, Form, FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
 
 //support routing by creating a new component
+
+class Review extends Component {
+
+    constructor(props) {
+        super(props);
+        this.submitReview = this.submitReview.bind(this);
+        this.updateDetails = this.updateDetails.bind(this);
+
+        this.state = {
+            details: {
+                rating: 5,
+                quote: ""
+            }
+        }
+    }
+
+    submitReview() {
+
+    }
+
+    updateDetails(event) {
+        let updateDetails = Object.assign({}, this.state.details);
+        console.log("details: "+JSON.stringify(this.state.details));
+        updateDetails[event.target.id] = event.target.value;
+        this.setState({
+            details: updateDetails
+        });
+    }
+
+    render() {
+        return (
+            <Form horizontal>
+                <h3>Write a Review</h3>
+                <FormGroup controlId="rating">
+                    <Col componentClass={ControlLabel} sm={2}>
+                        Rating
+                    </Col>
+                    <Col sm={10}>
+                        <FormControl onChange={this.updateDetails}
+                                     value={this.state.details.rating}
+                                     type="number" min="1" max="5" />
+                    </Col>
+                </FormGroup>
+                <FormGroup controlId="quote">
+                    <Col componentClass={ControlLabel} sm={2}>
+                        Review
+                    </Col>
+                    <Col sm={10}>
+                        <FormControl onChange={this.updateDetails}
+                                     value={this.state.details.quote} type="text"
+                                     placeholder="Type review here..." />
+                    </Col>
+                </FormGroup>
+                <FormGroup>
+                    <Button onClick={this.submitReview}>Submit Review</Button>
+                </FormGroup>
+            </Form>
+        )
+    }
+}
 
 class Movie extends Component {
 
@@ -28,7 +89,7 @@ class Movie extends Component {
         const ReviewInfo = ({reviews}) => {
             return reviews.map((review, i) =>
                 <p key={i}>
-                <b>{review.username}</b> {review.quote}
+                <b>{review.username ? review.username : review.user_id}</b> {review.quote}
                     <Glyphicon glyph={'star'} /> {review.rating}
                 </p>
             );
@@ -49,7 +110,8 @@ class Movie extends Component {
                         <ListGroupItem><ActorInfo actors={currentMovie.actors} /></ListGroupItem>
                         <ListGroupItem><h4><Glyphicon glyph={'star'} /> {currentMovie.avgRating} </h4></ListGroupItem>
                     </ListGroup>
-                    <Panel.Body>Some text</Panel.Body>
+                    <Panel.Body>{currentMovie.avgRating}</Panel.Body>
+                    <Panel.Body><Review /></Panel.Body>
                     <Panel.Body><ReviewInfo reviews={currentMovie.reviews} /></Panel.Body>
                 </Panel>
             );

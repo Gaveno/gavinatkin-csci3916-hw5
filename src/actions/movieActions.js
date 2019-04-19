@@ -46,6 +46,23 @@ export function fetchMovies(){
                 return response.json();
             })
             .then( (res) => {
+                res.result.forEach(function(e) {
+                    if (e.reviews) {
+                        //console.log("Num reviews: "+e.reviews.length);
+                        let total = 0;
+                        let num = e.reviews.length;
+                        if (num > 0) {
+                            for (let i = 0; i < e.reviews.length; i++) {
+                                total += e.reviews[i].rating;
+                            }
+                            e = Object.assign({}, e, {avgRating: total/num});
+                        }
+                        else {
+                            e = Object.assign({}, e, {avgRating: 0});
+                        }
+                        console.log("movie: " + JSON.stringify(e));
+                    }
+                });
                 dispatch(moviesFetched(res.result));
             })
             .catch( (e) => console.log(e) );
@@ -70,6 +87,20 @@ export function fetchMovie(movieId){
                 return response.json();
             })
             .then( (res) => {
+                if (res.result.reviews) {
+                    //console.log("Num reviews: "+res.result.reviews.length);
+                    let total = 0;
+                    let num = res.result.reviews.length;
+                    if (num > 0) {
+                        for (let i = 0; i < res.result.reviews.length; i++) {
+                            total += res.result.reviews[i].rating;
+                        }
+                        res.result = Object.assign({}, res.result, {avgRating: total/num});
+                    }
+                    else {
+                        res.result = Object.assign({}, res.result, {avgRating: 0});
+                    }
+                }
                 dispatch(movieFetched(res.result));
             })
             .catch( (e) => console.log(e) );
