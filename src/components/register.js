@@ -5,8 +5,8 @@ import { Col, Form, FormGroup, FormControl, ControlLabel, Button } from 'react-b
 
 class Register extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.updateDetails = this.updateDetails.bind(this);
         this.register = this.register.bind(this);
@@ -47,7 +47,7 @@ class Register extends Component {
 
                 <FormGroup controlId="username">
                     <Col componentClass={ControlLabel} sm={2}>
-                        Username
+                        Email
                     </Col>
                     <Col sm={10}>
                         <FormControl onChange={this.updateDetails} value={this.state.details.username} type="text" placeholder="Username" />
