@@ -60,7 +60,7 @@ export function fetchMovies(){
                         else {
                             e = Object.assign({}, e, {avgRating: 0});
                         }
-                        console.log("movie: " + JSON.stringify(e));
+                        //console.log("movie: " + JSON.stringify(e));
                     }
                 });
                 dispatch(moviesFetched(res.result));
@@ -87,21 +87,23 @@ export function fetchMovie(movieId){
                 return response.json();
             })
             .then( (res) => {
-                if (res.result.reviews) {
+                let movie = res.result[0];
+                if (movie.reviews) {
                     //console.log("Num reviews: "+res.result.reviews.length);
                     let total = 0;
-                    let num = res.result.reviews.length;
+                    let num = movie.reviews.length;
                     if (num > 0) {
-                        for (let i = 0; i < res.result.reviews.length; i++) {
-                            total += res.result.reviews[i].rating;
+                        for (let i = 0; i < movie.reviews.length; i++) {
+                            total += movie.reviews[i].rating;
                         }
-                        res.result = Object.assign({}, res.result, {avgRating: total/num});
+                        movie = Object.assign({}, movie, {avgRating: total/num});
                     }
                     else {
-                        res.result = Object.assign({}, res.result, {avgRating: 0});
+                        movie = Object.assign({}, movie, {avgRating: 0});
                     }
                 }
-                dispatch(movieFetched(res.result));
+                //console.log("movie: " + JSON.stringify(movie));
+                dispatch(movieFetched(movie));
             })
             .catch( (e) => console.log(e) );
     }
