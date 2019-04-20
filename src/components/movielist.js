@@ -50,7 +50,7 @@ class MovieList extends Component {
 
                         <Carousel.Caption>
                             <div style={{
-                                'width': '30%',
+                                'width': '263px',
                                 'fontSize': '20px',
                                 'backgroundColor': '#888',
                                 'margin': 'auto',
