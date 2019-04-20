@@ -41,7 +41,9 @@ class Register extends Component {
                         Email
                     </Col>
                     <Col sm={10}>
-                        <FormControl onChange={this.updateDetails} value={this.state.details.name} type="text" placeholder="Name" />
+                        <FormControl onChange={this.updateDetails}
+                                     value={this.state.details.name}
+                                     type="text" placeholder="Name" />
                     </Col>
                 </FormGroup>
 
@@ -50,7 +52,9 @@ class Register extends Component {
                         Email
                     </Col>
                     <Col sm={10}>
-                        <FormControl onChange={this.updateDetails} value={this.state.details.username} type="text" placeholder="Username" />
+                        <FormControl onChange={this.updateDetails}
+                                     value={this.state.details.username}
+                                     type="text" placeholder="Username" />
                     </Col>
                 </FormGroup>
 
@@ -59,7 +63,9 @@ class Register extends Component {
                         Password
                     </Col>
                     <Col sm={10}>
-                        <FormControl onChange={this.updateDetails} value={this.state.details.password} type="password" placeholder="Password" />
+                        <FormControl onChange={this.updateDetails}
+                                     value={this.state.details.password}
+                                     type="password" placeholder="Password" />
                     </Col>
                 </FormGroup>
 

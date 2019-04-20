@@ -6,10 +6,11 @@ import { withRouter } from "react-router-dom";
 import {fetchMovie} from "../actions/movieActions";
 import posterNotFound from "./posterNotFound.jpg";
 import { Col, Form, FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
+import runtimeEnv from '@mars/heroku-js-runtime-env';
 
 //support routing by creating a new component
 
-class Review extends Component {
+class ReviewInput extends Component {
 
     constructor(props) {
         super(props);
@@ -25,12 +26,55 @@ class Review extends Component {
     }
 
     submitReview() {
-
+        const env = runtimeEnv();
+        /*let formBody = new FormData();
+        formBody.set("movie", this.props.movieId);
+        formBody.set("quote", this.state.details.quote);
+        formBody.set("rating", this.state.details.rating);*/
+        let details = {
+            'movie': this.props.movieId,
+            'quote': this.state.details.quote,
+            'rating': this.state.details.rating
+        };
+        let formBody = [];
+        for (let property in details) {
+            let encodedKey = encodeURIComponent(property);
+            let encodedValue = encodeURIComponent(details[property]);
+            formBody.push(encodedKey + "=" + encodedValue);
+        }
+        formBody = formBody.join("&");
+        let headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': localStorage.getItem('token')
+        };
+        //console.log("headers: "+JSON.stringify(headers));
+        //console.log("body: "+JSON.stringify(formBody));
+        return fetch(`${env.REACT_APP_API_URL}/reviews`, {
+            method: 'POST',
+            headers: headers,
+            mode: 'cors',
+            body: formBody
+        })
+        .then((response) => {
+            console.log("response: "+JSON.stringify(response));
+            console.log("statusText: "+response.statusText);
+            //console.log("resheaders: "+JSON.stringify(response.headers));
+            if (!response || !response.status) {
+                throw Error(response.statusText);
+            }
+            return response;
+        })
+        .then((res) => {
+            console.log("res: "+JSON.stringify(res));
+            window.location.reload();
+        })
+        .catch((e) => console.log(e));
     }
 
     updateDetails(event) {
         let updateDetails = Object.assign({}, this.state.details);
-        console.log("details: "+JSON.stringify(this.state.details));
+        //console.log("details: "+JSON.stringify(this.state.details));
         updateDetails[event.target.id] = event.target.value;
         this.setState({
             details: updateDetails
@@ -70,6 +114,12 @@ class Review extends Component {
 }
 
 class Movie extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            avgRating: 0
+        }
+    }
 
     componentDidMount() {
         const {dispatch} = this.props;
@@ -89,15 +139,26 @@ class Movie extends Component {
         const ReviewInfo = ({reviews}) => {
             return reviews.map((review, i) =>
                 <p key={i}>
-                <b>{review.username ? review.username : review.user_id}</b> {review.quote}
+                <b>@{review.username ? review.username : review.user_id}:</b> {review.quote}
                     <Glyphicon glyph={'star'} /> {review.rating}
                 </p>
             );
-        }
+        };
 
         const DetailInfo = ({currentMovie}) => {
             if (!currentMovie) { // evaluates to true if currentMovie is null
                 return <div>Loading...</div>;
+            }
+            if (!currentMovie.avgRating) {
+                let total = 0;
+                for (let i = 0; i < currentMovie.reviews.length; i++) {
+                    total += currentMovie.reviews[i].rating;
+                }
+                if (currentMovie.reviews.length > 0) {
+                    currentMovie = Object.assign({},
+                        currentMovie,
+                        {avgRating: total/currentMovie.reviews.length});
+                }
             }
             return (
                 <Panel>
@@ -108,11 +169,15 @@ class Movie extends Component {
                     <ListGroup>
                         <ListGroupItem>{currentMovie.title}</ListGroupItem>
                         <ListGroupItem><ActorInfo actors={currentMovie.actors} /></ListGroupItem>
-                        <ListGroupItem><h4><Glyphicon glyph={'star'} /> {currentMovie.avgRating} </h4></ListGroupItem>
+                        <ListGroupItem>
+                            <h4>Average Rating: <Glyphicon glyph={'star'} /> {currentMovie.avgRating} </h4>
+                        </ListGroupItem>
+                        <ListGroupItem><Panel.Body><ReviewInput movieId={currentMovie._id} /></Panel.Body></ListGroupItem>
                     </ListGroup>
-                    <Panel.Body>{currentMovie.avgRating}</Panel.Body>
-                    <Panel.Body><Review /></Panel.Body>
-                    <Panel.Body><ReviewInfo reviews={currentMovie.reviews} /></Panel.Body>
+                    <Panel.Body>
+                        <h3>Reviews</h3>
+                        <ReviewInfo reviews={currentMovie.reviews} />
+                    </Panel.Body>
                 </Panel>
             );
         };
