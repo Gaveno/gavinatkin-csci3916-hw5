@@ -33,7 +33,7 @@ class MovieHeader extends Component {
                     </Nav>
                 </Navbar>
                 <header className="App-header">
-                    <h1 className="App-title">{(this.props.selectedMovie ? this.props.selectedMovie.title : '')}</h1>
+                    <h1 className="App-title" style={{'fontSize': '40px'}}>{(this.props.selectedMovie ? this.props.selectedMovie.title : '')}</h1>
                 </header>
             </div>
 

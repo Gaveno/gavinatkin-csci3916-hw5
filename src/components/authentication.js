@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import Login from './login';
 import Register from './register';
 import { logoutUser } from '../actions/authActions';
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class Authentication extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
             toggleReg: false
@@ -38,11 +39,24 @@ class Authentication extends Component {
 
         const userNotLoggedIn = (
             <div>
-                <button onClick={this.showLogin.bind(this)}>Login</button><button onClick={this.showReg.bind(this)}>Register</button>
-                { this.state.toggleReg ? <Register /> : <Login /> }
+                <ListGroup>
+                    <ListGroupItem>
+                        <Button onClick={this.showLogin.bind(this)} block>
+                            <b>Login to an existing user account</b>
+                        </Button>
+                        <Button onClick={this.showReg.bind(this)} block>
+                            <b>Register a new user account</b>
+                        </Button>
+                    </ListGroupItem>
+                <ListGroupItem>
+                    { this.state.toggleReg ? <Register /> : <Login /> }
+                </ListGroupItem>
+                </ListGroup>
             </div>
         );
-        const userLoggedIn = (<div>Logged in as: {this.props.username} <button onClick={this.logout.bind(this)}>Logout</button></div>);
+        const userLoggedIn = (
+            <div>Logged in as: {this.props.username} <button onClick={this.logout.bind(this)}>Logout</button></div>
+        );
 
         return (
             <div>

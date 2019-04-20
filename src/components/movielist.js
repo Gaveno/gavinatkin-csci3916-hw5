@@ -47,9 +47,17 @@ class MovieList extends Component {
                                 <Image className="image" src={movie.imageURL ? movie.imageURL : posterNotFound} thumbnail />
                             </LinkContainer>
                         </div>
+
                         <Carousel.Caption>
-                            <h3>{movie.title}</h3>
-                            <Glyphicon glyph={'star'} /> {movie.avgRating} &nbsp;&nbsp; {movie.year}
+                            <div style={{
+                                'width': '30%',
+                                'fontSize': '20px',
+                                'backgroundColor': '#888',
+                                'margin': 'auto',
+                                'opacity': '0.9',
+                            }}>
+                                {movie.title}
+                                <div><Glyphicon glyph={'star'} /> {movie.avgRating} &nbsp;&nbsp; {movie.year}</div></div>
                         </Carousel.Caption>
                     </Carousel.Item>)}
             </Carousel>);
