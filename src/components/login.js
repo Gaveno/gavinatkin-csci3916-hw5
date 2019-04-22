@@ -42,7 +42,7 @@ class Login extends Component {
                     <Col sm={10}>
                         <FormControl onChange={this.updateDetails}
                                      value={this.state.details.username}
-                                     type="email" placeholder="Email" />
+                                     type="email" placeholder="Username" />
                     </Col>
                 </FormGroup>
 
