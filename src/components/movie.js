@@ -149,17 +149,6 @@ class Movie extends Component {
             if (!currentMovie) { // evaluates to true if currentMovie is null
                 return <div>Loading...</div>;
             }
-            /*if (!currentMovie.avgRating) {
-                let total = 0;
-                for (let i = 0; i < currentMovie.reviews.length; i++) {
-                    total += currentMovie.reviews[i].rating;
-                }
-                if (currentMovie.reviews.length > 0) {
-                    currentMovie = Object.assign({},
-                        currentMovie,
-                        {avgRating: total/currentMovie.reviews.length});
-                }
-            }*/
             return (
                 <Panel>
                     <Panel.Heading>Movie Detail</Panel.Heading>

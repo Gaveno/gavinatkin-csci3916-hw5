@@ -43,14 +43,14 @@ class Authentication extends Component {
                 <ListGroup>
                     <ListGroupItem>
                         <Row>
-                        <Button onClick={this.showLogin.bind(this)} block>
-                            <b>Login to an existing user account</b>
-                        </Button>
-                        </Row>
-                        <Row>
-                        <Button onClick={this.showReg.bind(this)} block>
-                            <b>Register a new user account</b>
-                        </Button>
+                        <Col smOffset={3} sm={5}>
+                            <Button onClick={this.showLogin.bind(this)} block>
+                                <b>Login to an existing user account</b>
+                            </Button>
+                            <Button onClick={this.showReg.bind(this)} block>
+                                <b>Register a new user account</b>
+                            </Button>
+                        </Col>
                         </Row>
                     </ListGroupItem>
                 <ListGroupItem>

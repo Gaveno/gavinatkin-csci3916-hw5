@@ -36,11 +36,15 @@ class Register extends Component {
     render(){
         return (
             <Form horizontal>
-                <FormGroup controlId="name">
+                <FormGroup controlId="title">
+                    <Col sm={7}>
                     <div style={{'fontSize': '20px'}}>
-                         Register Account
+                        Register Account
                     </div>
-                    <Col componentClass={ControlLabel} sm={4}>
+                    </Col>
+                </FormGroup>
+                <FormGroup controlId="name">
+                    <Col componentClass={ControlLabel} sm={4} md={3}>
                         First Name
                     </Col>
                     <Col sm={8}>
@@ -51,8 +55,8 @@ class Register extends Component {
                 </FormGroup>
 
                 <FormGroup controlId="username">
-                    <Col componentClass={ControlLabel} sm={4}>
-                        Email
+                    <Col componentClass={ControlLabel} sm={4} md={3}>
+                        Username
                     </Col>
                     <Col sm={8}>
                         <FormControl onChange={this.updateDetails}
@@ -62,7 +66,7 @@ class Register extends Component {
                 </FormGroup>
 
                 <FormGroup controlId="password">
-                    <Col componentClass={ControlLabel} sm={4}>
+                    <Col componentClass={ControlLabel} sm={4} md={3}>
                         Password
                     </Col>
                     <Col sm={8}>
@@ -73,8 +77,8 @@ class Register extends Component {
                 </FormGroup>
 
                 <FormGroup>
-                    <Col smOffset={2} sm={10}>
-                        <Button onClick={this.register}>Register</Button>
+                    <Col xs={9}>
+                        <Button onClick={this.register} block>Register</Button>
                     </Col>
                 </FormGroup>
             </Form>

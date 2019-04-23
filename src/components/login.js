@@ -35,11 +35,15 @@ class Login extends Component {
     render(){
         return (
             <Form horizontal>
-                <FormGroup controlId="username">
+                <FormGroup controlId="title">
+                    <Col sm={7}>
                     <div style={{'fontSize': '20px'}}>
                         Login to Account
                     </div>
-                    <Col componentClass={ControlLabel} sm={3}>
+                    </Col>
+                </FormGroup>
+                <FormGroup controlId="username">
+                    <Col componentClass={ControlLabel} sm={3} lg={2}>
                         Username
                     </Col>
                     <Col sm={8}>
@@ -50,7 +54,7 @@ class Login extends Component {
                 </FormGroup>
 
                 <FormGroup controlId="password">
-                    <Col componentClass={ControlLabel} sm={3}>
+                    <Col componentClass={ControlLabel} sm={3} lg={2}>
                         Password
                     </Col>
                     <Col sm={8}>
@@ -61,8 +65,8 @@ class Login extends Component {
                 </FormGroup>
 
                 <FormGroup>
-                    <Col smOffset={0} sm={9}>
-                        <Button onClick={this.login}>Sign in</Button>
+                    <Col xs={9}>
+                        <Button onClick={this.login} block>Sign in</Button>
                     </Col>
                 </FormGroup>
             </Form>
