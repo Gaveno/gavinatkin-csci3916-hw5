@@ -37,21 +37,24 @@ class Register extends Component {
         return (
             <Form horizontal>
                 <FormGroup controlId="name">
-                    <Col componentClass={ControlLabel} sm={2}>
-                        Name
+                    <div style={{'fontSize': '20px'}}>
+                         Register Account
+                    </div>
+                    <Col componentClass={ControlLabel} sm={4}>
+                        First Name
                     </Col>
-                    <Col sm={10}>
+                    <Col sm={8}>
                         <FormControl onChange={this.updateDetails}
                                      value={this.state.details.name}
-                                     type="text" placeholder="Name" />
+                                     type="text" placeholder="First Name" />
                     </Col>
                 </FormGroup>
 
                 <FormGroup controlId="username">
-                    <Col componentClass={ControlLabel} sm={2}>
-                        Username
+                    <Col componentClass={ControlLabel} sm={4}>
+                        Email
                     </Col>
-                    <Col sm={10}>
+                    <Col sm={8}>
                         <FormControl onChange={this.updateDetails}
                                      value={this.state.details.username}
                                      type="text" placeholder="Username" />
@@ -59,10 +62,10 @@ class Register extends Component {
                 </FormGroup>
 
                 <FormGroup controlId="password">
-                    <Col componentClass={ControlLabel} sm={2}>
+                    <Col componentClass={ControlLabel} sm={4}>
                         Password
                     </Col>
-                    <Col sm={10}>
+                    <Col sm={8}>
                         <FormControl onChange={this.updateDetails}
                                      value={this.state.details.password}
                                      type="password" placeholder="Password" />

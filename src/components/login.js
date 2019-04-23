@@ -36,21 +36,24 @@ class Login extends Component {
         return (
             <Form horizontal>
                 <FormGroup controlId="username">
-                    <Col componentClass={ControlLabel} sm={2}>
+                    <div style={{'fontSize': '20px'}}>
+                        Login to Account
+                    </div>
+                    <Col componentClass={ControlLabel} sm={3}>
                         Username
                     </Col>
-                    <Col sm={10}>
+                    <Col sm={8}>
                         <FormControl onChange={this.updateDetails}
                                      value={this.state.details.username}
-                                     type="email" placeholder="Username" />
+                                     type="text" placeholder="Username" />
                     </Col>
                 </FormGroup>
 
                 <FormGroup controlId="password">
-                    <Col componentClass={ControlLabel} sm={2}>
+                    <Col componentClass={ControlLabel} sm={3}>
                         Password
                     </Col>
-                    <Col sm={10}>
+                    <Col sm={8}>
                         <FormControl onChange={this.updateDetails}
                                      value={this.state.details.password}
                                      type="password" placeholder="Password" />
@@ -58,7 +61,7 @@ class Login extends Component {
                 </FormGroup>
 
                 <FormGroup>
-                    <Col smOffset={2} sm={10}>
+                    <Col smOffset={0} sm={9}>
                         <Button onClick={this.login}>Sign in</Button>
                     </Col>
                 </FormGroup>

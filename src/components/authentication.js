@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Login from './login';
 import Register from './register';
 import { logoutUser } from '../actions/authActions';
-import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem, Col, Grid, Row } from 'react-bootstrap';
 
 class Authentication extends Component {
 
@@ -39,19 +39,25 @@ class Authentication extends Component {
 
         const userNotLoggedIn = (
             <div>
+                <Grid>
                 <ListGroup>
                     <ListGroupItem>
+                        <Row>
                         <Button onClick={this.showLogin.bind(this)} block>
                             <b>Login to an existing user account</b>
                         </Button>
+                        </Row>
+                        <Row>
                         <Button onClick={this.showReg.bind(this)} block>
                             <b>Register a new user account</b>
                         </Button>
+                        </Row>
                     </ListGroupItem>
                 <ListGroupItem>
                     { this.state.toggleReg ? <Register /> : <Login /> }
                 </ListGroupItem>
                 </ListGroup>
+                </Grid>
             </div>
         );
         const userLoggedIn = (
