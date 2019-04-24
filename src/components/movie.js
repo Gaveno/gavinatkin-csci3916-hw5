@@ -63,7 +63,7 @@ class ReviewInput extends Component {
             if (!response || !response.status) {
                 throw Error(response.statusText);
             }
-            return response;
+            return response.json();
         })
         .then((res) => {
             console.log("res: "+JSON.stringify(res));
@@ -101,7 +101,7 @@ class ReviewInput extends Component {
                     </Col>
                     <Col sm={10}>
                         <FormControl onChange={this.updateDetails}
-                                     value={this.state.details.quote} type="text"
+                                     value={this.state.details.quote} componentClass="textarea"
                                      placeholder="Type review here..." />
                     </Col>
                 </FormGroup>

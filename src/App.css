@@ -24,12 +24,25 @@
 
 .form-horizontal {
   width: 40% !important;
-  margin-left: 30%
+  margin-left: 30%;
+  border-bottom: 1px solid #ddd
 }
 
 .image {
   height: 400px;
 }
+
+.search-button {
+  float: left;
+  margin-left: -30px;
+  width: 120px;
+}
+
+.search-bar {
+  float: right;
+  width: 200px;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
