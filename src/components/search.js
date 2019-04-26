@@ -10,11 +10,8 @@ import {LinkContainer} from "react-router-bootstrap";
 class Search extends Component {
     constructor(props) {
         super(props);
-
         this.search = this.search.bind(this);
         this.updateDetails = this.updateDetails.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-
         this.state = {
             details: {
                 searchString: ""
