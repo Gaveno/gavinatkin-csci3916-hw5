@@ -91,8 +91,15 @@ class ReviewInput extends Component {
                     </Col>
                     <Col sm={10}>
                         <FormControl onChange={this.updateDetails}
-                                     value={this.state.details.rating}
-                                     type="number" min="1" max="5" />
+                                     componentClass="select"
+                                     placeholder="rating"
+                                     value={this.state.details.rating}>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Stars</option>
+                        </FormControl>
                     </Col>
                 </FormGroup>
                 <FormGroup controlId="quote">
