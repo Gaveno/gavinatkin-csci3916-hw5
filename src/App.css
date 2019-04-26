@@ -42,6 +42,20 @@
   width: 200px;
 }
 
+.search-movies {
+  float: left;
+  margin-left: 20%;
+  width: 60%;
+  border: 1px solid #bbb;
+  align-content: start;
+  text-align: left;
+  font-size: 1em;
+}
+
+.search-image {
+  width: 200px;
+  float: left;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

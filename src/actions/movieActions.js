@@ -89,8 +89,22 @@ export function fetchMovie(movieId){
 export function searchMovies(movies, searchString) {
 
     return dispatch => {
-        // TO-DO: Search through
-        let results = movies;
+        let ss = searchString.toUpperCase();
+        let results = [];
+        movies.forEach((movie) => {
+            let m = false;
+            if (movie.title.toUpperCase().includes(ss) ||
+                movie.year.toUpperCase().includes(ss) ||
+                movie.genre.toUpperCase().includes(ss))
+                m = true;
+            for (let i = 0; i < movie.actors.length; i++) {
+                if (movie.actors[i].actorname.toUpperCase().includes(ss) ||
+                    movie.actors[i].charactername.toUpperCase().includes(ss))
+                    m = true;
+            }
+            if (m === true)
+                results.push(movie);
+        });
         dispatch(movieResults(results));
     }
 }

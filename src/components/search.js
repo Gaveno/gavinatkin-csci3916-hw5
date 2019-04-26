@@ -1,6 +1,8 @@
 import React, { Component }  from 'react';
-import {Form, FormGroup, FormControl, Row, Col, Button} from 'react-bootstrap';
+import {Form, FormGroup, FormControl, Row, Col, Button, Glyphicon} from 'react-bootstrap';
 import {connect} from "react-redux";
+import posterNotFound from "./posterNotFound.jpg";
+import { Image } from 'react-bootstrap'
 import {fetchMovies, searchMovies} from "../actions/movieActions";
 
 
@@ -39,6 +41,35 @@ class Search extends Component {
     }
 
     render() {
+        const ActorInfo = ({movie}) => {
+            return movie.actors.map((actor, i) =>
+                <Row key={"a:"+i}>
+                    <i>{actor.actorname}</i> as <i>{actor.charactername}</i>
+                </Row>
+            );
+        };
+        const MovieResults = ({results}) => {
+            return results.map((movie, i) =>
+                <Row key={i} className="search-movies">
+                    <Col xs={6}>
+                    <Image className="search-image"
+                           src={movie.imageURL ? movie.imageURL : posterNotFound} thumbnail />
+                    </Col>
+                    <Col xs={5}>
+                        <Row>
+                            <b>Title:</b> {movie.title}
+                        </Row>
+                        <Row>
+                            <b>Average Rating:</b> <Glyphicon glyph={'star'} /> {movie.avgRating}
+                        </Row>
+                        <Row>
+                            <b>Staring:</b>
+                        </Row>
+                        <ActorInfo movie={movie} />
+                    </Col>
+                </Row>
+            );
+        };
         return (
             <Form>
                 <Row className="form-horizontal">
@@ -55,9 +86,9 @@ class Search extends Component {
                         </Col>
                     </FormGroup>
                 </Row>
-                <Row className="form-horizontal">
+                <Row>
                     <FormGroup controlId="searchresults">
-
+                        <MovieResults results={this.props.searchResults}/>
                     </FormGroup>
                 </Row>
             </Form>
@@ -67,8 +98,9 @@ class Search extends Component {
 
 const mapStateToProps = state => {
     return {
-        movies: state.movie.movies
+        movies: state.movie.movies,
+        searchResults: state.movie.searchResults
     }
-}
+};
 
 export default connect(mapStateToProps)(Search);
