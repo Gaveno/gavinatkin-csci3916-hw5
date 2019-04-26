@@ -3,7 +3,8 @@ import {Form, FormGroup, FormControl, Row, Col, Button, Glyphicon} from 'react-b
 import {connect} from "react-redux";
 import posterNotFound from "./posterNotFound.jpg";
 import { Image } from 'react-bootstrap'
-import {fetchMovies, searchMovies} from "../actions/movieActions";
+import {fetchMovies, searchMovies, setMovie} from "../actions/movieActions";
+import {LinkContainer} from "react-router-bootstrap";
 
 
 class Search extends Component {
@@ -12,6 +13,7 @@ class Search extends Component {
 
         this.search = this.search.bind(this);
         this.updateDetails = this.updateDetails.bind(this);
+        this.handleClick = this.handleClick.bind(this);
 
         this.state = {
             details: {
@@ -35,6 +37,11 @@ class Search extends Component {
             dispatch(fetchMovies());
     }
 
+    handleClick = (movie) => {
+        const {dispatch} = this.props;
+        dispatch(setMovie(movie));
+    }
+
     search() {
         const {dispatch} = this.props;
         dispatch(searchMovies(this.props.movies, this.state.details.searchString));
@@ -52,8 +59,11 @@ class Search extends Component {
             return results.map((movie, i) =>
                 <Row key={i} className="search-movies">
                     <Col xs={6}>
-                    <Image className="search-image"
-                           src={movie.imageURL ? movie.imageURL : posterNotFound} thumbnail />
+                        <LinkContainer to={'/movie/'+movie._id}
+                                       onClick={()=>this.handleClick(movie)}>
+                            <Image className="search-image"
+                                   src={movie.imageURL ? movie.imageURL : posterNotFound} thumbnail />
+                        </LinkContainer>
                     </Col>
                     <Col xs={5}>
                         <Row>
