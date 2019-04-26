@@ -17,7 +17,7 @@ class MovieHeader extends Component {
                 <Navbar>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            Movie App
+                            Gavin's Homework 5
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav>
