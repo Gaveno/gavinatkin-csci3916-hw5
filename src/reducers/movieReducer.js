@@ -2,7 +2,8 @@ import constants from '../constants/actionTypes'
 
 var initialState = {
     movies: [],
-    selectedMovie: null
+    selectedMovie: null,
+    searchResults: []
 }
 
 export default (state = initialState, action) => {
@@ -19,6 +20,9 @@ export default (state = initialState, action) => {
             return updated;
         case constants.FETCH_MOVIE:
             updated['selectedMovie'] = action.selectedMovie;
+            return updated;
+        case constants.SEARCH_MOVIES:
+            updated['searchResults'] = action.searchResults;
             return updated;
         default:
             return state;

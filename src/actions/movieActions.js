@@ -22,11 +22,20 @@ function movieSet(movie){
     }
 }
 
+function movieResults(movies) {
+    return {
+        type: actionTypes.SEARCH_MOVIES,
+        searchResults: movies
+    }
+}
+
 export function setMovie(movie) {
     return dispatch => {
         dispatch(movieSet(movie));
     }
 }
+
+
 
 export function fetchMovies(){
     const env = runtimeEnv();
@@ -74,5 +83,14 @@ export function fetchMovie(movieId){
                 dispatch(movieFetched(movie));
             })
             .catch( (e) => console.log(e) );
+    }
+}
+
+export function searchMovies(movies, searchString) {
+
+    return dispatch => {
+        // TO-DO: Search through
+        let results = movies;
+        dispatch(movieResults(results));
     }
 }
